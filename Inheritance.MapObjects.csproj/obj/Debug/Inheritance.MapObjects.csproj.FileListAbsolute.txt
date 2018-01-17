@@ -1,0 +1,8 @@
+C:\source\Inheritance.MapObjects\Inheritance.MapObjects.csproj\bin\Debug\Inheritance.MapObjects.exe.config
+C:\source\Inheritance.MapObjects\Inheritance.MapObjects.csproj\bin\Debug\Inheritance.MapObjects.exe
+C:\source\Inheritance.MapObjects\Inheritance.MapObjects.csproj\bin\Debug\Inheritance.MapObjects.pdb
+C:\source\Inheritance.MapObjects\Inheritance.MapObjects.csproj\bin\Debug\nunit.framework.dll
+C:\source\Inheritance.MapObjects\Inheritance.MapObjects.csproj\bin\Debug\nunitlite.dll
+C:\source\Inheritance.MapObjects\Inheritance.MapObjects.csproj\obj\Debug\Inheritance.MapObjects.csprojResolveAssemblyReference.cache
+C:\source\Inheritance.MapObjects\Inheritance.MapObjects.csproj\obj\Debug\Inheritance.MapObjects.exe
+C:\source\Inheritance.MapObjects\Inheritance.MapObjects.csproj\obj\Debug\Inheritance.MapObjects.pdb

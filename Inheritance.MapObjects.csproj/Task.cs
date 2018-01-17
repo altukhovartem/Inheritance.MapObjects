@@ -6,30 +6,45 @@ using System.Threading.Tasks;
 
 namespace Inheritance.MapObjects
 {
-    public class Dwelling
+    interface IOwner
+    {
+        int Owner { get; set; }
+    }
+
+    interface IArmy
+    {
+        Army Army { get; set; }
+    }
+
+    interface ITreasure
+    {
+        Treasure Treasure { get; set; }
+    }
+
+    public class Dwelling: IOwner
     {
         public int Owner { get; set; }
     }
 
-    public class Mine
+    public class Mine: IOwner, IArmy, ITreasure
     {
         public int Owner { get; set; }
         public Army Army { get; set; }
         public Treasure Treasure { get; set; }
     }
 
-    public class Creeps
+    public class Creeps: IArmy, ITreasure
     {
         public Army Army { get; set; }
         public Treasure Treasure { get; set; }
     }
 
-    public class Wolfs
+    public class Wolfs: IArmy
     {
         public Army Army { get; set; }
     }
 
-    public class ResourcePile
+    public class ResourcePile: ITreasure
     {
         public Treasure Treasure { get; set; }
     }
@@ -38,37 +53,37 @@ namespace Inheritance.MapObjects
     {
         public static void Make(Player player, object mapObject)
         {
-            if (mapObject is Dwelling)
+            if (mapObject is IOwner && !(mapObject is IArmy)&& !(mapObject is ITreasure))
             {
-                ((Dwelling)mapObject).Owner = player.Id;
+                ((IOwner)mapObject).Owner = player.Id;
                 return;
             }
-            if (mapObject is Mine)
+            if (mapObject is IArmy && mapObject is ITreasure && mapObject is IOwner)
             {
-                if (player.CanBeat(((Mine)mapObject).Army))
+                if (player.CanBeat(((IArmy)mapObject).Army))
                 {
-                    ((Mine)mapObject).Owner = player.Id;
-                    player.Consume(((Mine)mapObject).Treasure);
+                    ((IOwner)mapObject).Owner = player.Id;
+                    player.Consume(((ITreasure)mapObject).Treasure);
                 }
                 else player.Die();
                 return;
             }
-            if (mapObject is Creeps)
+            if (mapObject is IArmy && mapObject is ITreasure && !(mapObject is IOwner))
             {
-                if (player.CanBeat(((Creeps)mapObject).Army))
-                    player.Consume(((Creeps)mapObject).Treasure);
+                if (player.CanBeat(((IArmy)mapObject).Army))
+                    player.Consume(((ITreasure)mapObject).Treasure);
                 else
                     player.Die();
                 return;
             }
-            if (mapObject is ResourcePile)
+            if (mapObject is ITreasure && !(mapObject is IOwner) && !(mapObject is IArmy))
             {
-                player.Consume(((ResourcePile)mapObject).Treasure);
+                player.Consume(((ITreasure)mapObject).Treasure);
                 return;
             }
-            if (mapObject is Wolfs)
+            if (mapObject is IArmy && !(mapObject is ITreasure) && !(mapObject is IOwner))
             {
-                if (!player.CanBeat(((Wolfs)mapObject).Army))
+                if (!player.CanBeat(((IArmy)mapObject).Army))
                     player.Die();
             }
         }
